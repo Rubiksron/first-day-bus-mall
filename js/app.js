@@ -29,29 +29,29 @@ function makeRandom() {
 }
 
 function displayPics(){
-  var at = [];
-  at[0] = makeRandom();
-  at[1] = makeRandom();
+  var uniquePicsArray = [];
+  uniquePicsArray[0] = makeRandom();
+  uniquePicsArray[1] = makeRandom();
 
-  while(at[0] === at[1]) {
+  while(uniquePicsArray[0] === uniquePicsArray[1]) {
     console.error('Duplicate! Re-rolling!');
-    at[1] = makeRandom();
+    uniquePicsArray[1] = makeRandom();
   }
 
-  at[2] = makeRandom();
-  while(at[0] === at[2] || at[1] === at[2]){
+  uniquePicsArray[2] = makeRandom();
+  while(uniquePicsArray[0] === uniquePicsArray[2] || uniquePicsArray[1] === uniquePicsArray[2]){
     console.error('Duplicate! Re-rolling!');
-    at[2] = makeRandom();
+    uniquePicsArray[2] = makeRandom();
   }
-  Product.left.src = Product.all[at[0]].path;
-  Product.center.src = Product.all[at[1]].path;
-  Product.right.src = Product.all[at[2]].path;
-  Product.left.id = Product.all[at[0]].name;
-  Product.center.id = Product.all[at[1]].name;
-  Product.right.id = Product.all[at[2]].name;
-  Product.all[at[0]].views += 1;
-  Product.all[at[1]].views += 1;
-  Product.all[at[2]].views += 1;
+  Product.left.src = Product.all[uniquePicsArray[0]].path;
+  Product.center.src = Product.all[uniquePicsArray[1]].path;
+  Product.right.src = Product.all[uniquePicsArray[2]].path;
+  Product.left.id = Product.all[uniquePicsArray[0]].name;
+  Product.center.id = Product.all[uniquePicsArray[1]].name;
+  Product.right.id = Product.all[uniquePicsArray[2]].name;
+  Product.all[uniquePicsArray[0]].views += 1;
+  Product.all[uniquePicsArray[1]].views += 1;
+  Product.all[uniquePicsArray[2]].views += 1;
 }
 
 function handleClick(event) {
