@@ -1,31 +1,32 @@
 'use strict';
 
-Product.names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
-Product.totalClicks = 0;
+Goat.names = ['cruisin-goat', 'float-your-goat', 'goat-away', 'goat-out-of-hand', 'kissing-goat', 'sassy-goat', 'smiling-goat', 'sweater-goat'];
 
-Product.left = document.getElementById('left');
-Product.center = document.getElementById('center');
-Product.right = document.getElementById('right');
-Product.container = document.getElementById('image_container');
-Product.tally = document.getElementById('tally');
 
-function Product(name) {
+Goat.totalClicks = 0;
+
+Goat.left = document.getElementById('left');
+Goat.center = document.getElementById('center');
+Goat.container = document.getElementById('image_container');
+Goat.tally = document.getElementById('tally');
+
+function Goat(name) {
   this.name = name;
-  this.path = 'img/' + name + '.jpg';
+  this.path = 'images/' + name + '.jpg';
   this.votes = 0;
   this.views = 0;
-  Product.all.push(this);
+  Goat.all.push(this);
 }
 
-Product.all = [];
+Goat.all = [];
 
-for(var i = 0; i < Product.names.length; i++) {
-  new Product(Product.names[i]);
+for(var i = 0; i < Goat.names.length; i++) {
+  new Goat(Goat.names[i]);
 }
 
 function makeRandom() {
-  return Math.floor(Math.random() * Product.names.length);
+  return Math.floor(Math.random() * Goat.names.length);
 }
 
 function displayPics(){
@@ -43,43 +44,42 @@ function displayPics(){
     console.error('Duplicate! Re-rolling!');
     uniquePicsArray[2] = makeRandom();
   }
-  Product.left.src = Product.all[uniquePicsArray[0]].path;
-  Product.center.src = Product.all[uniquePicsArray[1]].path;
-  Product.right.src = Product.all[uniquePicsArray[2]].path;
-  Product.left.id = Product.all[uniquePicsArray[0]].name;
-  Product.center.id = Product.all[uniquePicsArray[1]].name;
-  Product.right.id = Product.all[uniquePicsArray[2]].name;
-  Product.all[uniquePicsArray[0]].views += 1;
-  Product.all[uniquePicsArray[1]].views += 1;
-  Product.all[uniquePicsArray[2]].views += 1;
+  Goat.left.src = Goat.all[uniquePicsArray[0]].path;
+  Goat.center.src = Goat.all[uniquePicsArray[1]].path;
+
+  Goat.left.id = Goat.all[uniquePicsArray[0]].name;
+  Goat.center.id = Goat.all[uniquePicsArray[1]].name;
+
+  Goat.all[uniquePicsArray[0]].views += 1;
+  Goat.all[uniquePicsArray[1]].views += 1;
 }
 
 function handleClick(event) {
-  Product.totalClicks += 1;
-  console.log(Product.totalClicks, 'total clicks');
-  if(Product.totalClicks > 9) {
-    Product.container.removeEventListener('click', handleClick);
+  Goat.totalClicks += 1;
+  console.log(Goat.totalClicks, 'total clicks');
+  if(Goat.totalClicks > 9) {
+    Goat.container.removeEventListener('click', handleClick);
     showTally();
   }
   if (event.target.id === 'image_container') {
     return alert('Click on an image, dumbass!');
   }
-  for(var i = 0; i < Product.names.length; i++){
-    if(event.target.id === Product.all[i].name) {
-      Product.all[i].votes += 1;
-      console.log(event.target.id + ' has ' + Product.all[i].votes + ' votes in ' + Product.all[i].views + ' views');
+  for(var i = 0; i < Goat.names.length; i++){
+    if(event.target.id === Goat.all[i].name) {
+      Goat.all[i].votes += 1;
+      console.log(event.target.id + ' has ' + Goat.all[i].votes + ' votes in ' + Goat.all[i].views + ' views');
     }
   }
   displayPics();
 }
 
 function showTally() {
-  for(var i = 0; i < Product.all.length; i++) {
+  for(var i = 0; i < Goat.all.length; i++) {
     var liEl = document.createElement('li');
-    liEl.textContent = Product.all[i].name + ' has ' + Product.all[i].votes + ' votes in ' + Product.all[i].views + ' views';
-    Product.tally.appendChild(liEl);
+    liEl.textContent = Goat.all[i].name + ' has ' + Goat.all[i].votes + ' votes in ' + Goat.all[i].views + ' views';
+    Goat.tally.appendChild(liEl);
   }
 }
 
-Product.container.addEventListener('click', handleClick);
+Goat.container.addEventListener('click', handleClick);
 displayPics();
