@@ -1,85 +1,73 @@
 'use strict';
+//target html elements and store them in a variable
+var leftImageEl = document.getElementById('left');
+var rightImageEl = document.getElementById('right');
 
+//SHOW CONCEPT BY SETTING THESE PROPS MANUALLY
+//setting the src, name, and alt attributes to the leftImageEl
+leftImageEl.src = 'images/goat-away.jpg';
+leftImageEl.name = 'cruisin-goat';
+leftImageEl.alt = 'cruisin-goat';
+//setting the src, name, and alt attributes to the rightImageEl
+rightImageEl.src = 'images/kissing-goat.jpg';
+rightImageEl.name = 'kissing-goat';
+rightImageEl.alt = 'kissing-goat';
+//=============================================================
 
-Goat.names = ['cruisin-goat', 'float-your-goat', 'goat-away', 'goat-out-of-hand', 'kissing-goat', 'sassy-goat', 'smiling-goat', 'sweater-goat'];
-
-
-Goat.totalClicks = 0;
-
-Goat.left = document.getElementById('left');
-Goat.center = document.getElementById('center');
-Goat.container = document.getElementById('image_container');
-Goat.tally = document.getElementById('tally');
-
+//declare an array to push all new instantiations to
+var allGoats = [];
+//create a constructor function
 function Goat(name) {
   this.name = name;
-  this.path = 'images/' + name + '.jpg';
-  this.votes = 0;
-  this.views = 0;
-  Goat.all.push(this);
+  this.path = `images/${name}.jpg`;
+  allGoats.push(this);
 }
+//instantiate new Goats
+new Goat('cruisin-goat');
+new Goat('float-your-goat');
+new Goat('goat-away');
+new Goat('goat-out-of-hand');
+new Goat('kissing-goat');
+new Goat('sassy-goat');
+new Goat('smiling-goat');
+new Goat('sweater-goat');
 
-Goat.all = [];
-
-for(var i = 0; i < Goat.names.length; i++) {
-  new Goat(Goat.names[i]);
+//create a function that will give a random index number
+function renderGoats() {
+  //create a random index
+  var randomIndex = makeRandom();
+  //I want to display allGoats[randomIndex];
+  leftImageEl.src = allGoats[randomIndex].path;
+  leftImageEl.alt = allGoats[randomIndex].name;
+  //create a random index
+  randomIndex = makeRandom();
+  //I want to display allGoats[randomIndex];
+  rightImageEl.src = allGoats[randomIndex].path;
+  rightImageEl.alt = allGoats[randomIndex].name;
 }
-
+//helper function that will return a random number
 function makeRandom() {
-  return Math.floor(Math.random() * Goat.names.length);
+  return Math.floor(Math.random() * allGoats.length);
 }
 
-function displayPics(){
-  var uniquePicsArray = [];
-  uniquePicsArray[0] = makeRandom();
-  uniquePicsArray[1] = makeRandom();
+renderGoats();
 
-  while(uniquePicsArray[0] === uniquePicsArray[1]) {
-    console.error('Duplicate! Re-rolling!');
-    uniquePicsArray[1] = makeRandom();
-  }
-
-  uniquePicsArray[2] = makeRandom();
-  while(uniquePicsArray[0] === uniquePicsArray[2] || uniquePicsArray[1] === uniquePicsArray[2]){
-    console.error('Duplicate! Re-rolling!');
-    uniquePicsArray[2] = makeRandom();
-  }
-  Goat.left.src = Goat.all[uniquePicsArray[0]].path;
-  Goat.center.src = Goat.all[uniquePicsArray[1]].path;
-
-  Goat.left.id = Goat.all[uniquePicsArray[0]].name;
-  Goat.center.id = Goat.all[uniquePicsArray[1]].name;
-
-  Goat.all[uniquePicsArray[0]].views += 1;
-  Goat.all[uniquePicsArray[1]].views += 1;
-}
-
-function handleClick(event) {
-  Goat.totalClicks += 1;
-  console.log(Goat.totalClicks, 'total clicks');
-  if(Goat.totalClicks > 9) {
-    Goat.container.removeEventListener('click', handleClick);
-    showTally();
-  }
-  if (event.target.id === 'image_container') {
-    return alert('Click on an image, dumbass!');
-  }
-  for(var i = 0; i < Goat.names.length; i++){
-    if(event.target.id === Goat.all[i].name) {
-      Goat.all[i].votes += 1;
-      console.log(event.target.id + ' has ' + Goat.all[i].votes + ' votes in ' + Goat.all[i].views + ' views');
-    }
-  }
-  displayPics();
-}
-
-function showTally() {
-  for(var i = 0; i < Goat.all.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = Goat.all[i].name + ' has ' + Goat.all[i].votes + ' votes in ' + Goat.all[i].views + ' views';
-    Goat.tally.appendChild(liEl);
-  }
-}
-
-Goat.container.addEventListener('click', handleClick);
-displayPics();
+// //PREVENT DUPLICATES
+// function renderGoats() {
+//   //an array to store the unique indexes
+//   var uniquePicsArray = [];
+//   //initialize each index with a random integer
+//   uniquePicsArray[0] = makeRandom();
+//   uniquePicsArray[1] = makeRandom();
+//   //check to see the 2 indexes match, if they do, then add another random number until they do not natch
+//   while(uniquePicsArray[0] === uniquePicsArray[1]) {
+//     console.error('Duplicate! Re-rolling!');
+//     uniquePicsArray[1] = makeRandom();
+//   }
+//   //setting the src and alt attributes of the leftImageEl elements
+//   leftImageEl.src = allGoats[uniquePicsArray[0]].path;
+//   leftImageEl.alt = allGoats[uniquePicsArray[0]].name;
+//   //setting the src and alt attributes of the rightImageEl elements
+//   rightImageEl.src = allGoats[uniquePicsArray[1]].path;
+//   rightImageEl.alt = allGoats[uniquePicsArray[1]].name;
+// }
