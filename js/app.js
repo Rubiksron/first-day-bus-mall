@@ -7,15 +7,15 @@ var rightImageEl = document.getElementById('right');
 var containerEl = document.getElementById('image_container');
 
 //=============================================================
-// //SHOW CONCEPT BY SETTING THESE PROPS MANUALLY
-// //setting the src, name, and alt attributes to the leftImageEl
-// leftImageEl.src = 'images/goat-away.jpg';
-// leftImageEl.name = 'cruisin-goat';
-// leftImageEl.alt = 'cruisin-goat';
-// //setting the src, name, and alt attributes to the rightImageEl
-// rightImageEl.src = 'images/kissing-goat.jpg';
-// rightImageEl.name = 'kissing-goat';
-// rightImageEl.alt = 'kissing-goat';
+//SHOW CONCEPT BY SETTING THESE PROPS MANUALLY
+//setting the src, name, and title attributes to the leftImageEl
+leftImageEl.src = 'images/goat-away.jpg';
+leftImageEl.name = 'cruisin-goat';
+leftImageEl.title = 'cruisin-goat';
+//setting the src, name, and title attributes to the rightImageEl
+rightImageEl.src = 'images/kissing-goat.jpg';
+rightImageEl.name = 'kissing-goat';
+rightImageEl.title = 'kissing-goat';
 //=============================================================
 
 //declare an array to push all new instantiations to
@@ -52,14 +52,14 @@ function renderGoats() {
   }
   //adding one view to this goat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   allGoats[uniquePicsArray[0]].views++;
-  //setting the src and alt attributes of the leftImageEl elements
+  //setting the src and title attributes of the leftImageEl elements
   leftImageEl.src = allGoats[uniquePicsArray[0]].path;
   leftImageEl.name = allGoats[uniquePicsArray[0]].name;
   leftImageEl.title = allGoats[uniquePicsArray[0]].name;
 
   //adding one view to this goat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   allGoats[uniquePicsArray[1]].views++;
-  //setting the src and alt attributes of the rightImageEl elements
+  //setting the src and title attributes of the rightImageEl elements
   rightImageEl.src = allGoats[uniquePicsArray[1]].path;
   leftImageEl.name = allGoats[uniquePicsArray[1]].name;
   rightImageEl.title = allGoats[uniquePicsArray[1]].name;
@@ -71,16 +71,15 @@ function renderGoats() {
 //   var randomIndex = makeRandom();
 //   //I want to display allGoats[randomIndex];
 //   leftImageEl.src = allGoats[randomIndex].path;
-//   leftImageEl.alt = allGoats[randomIndex].name;
+//   leftImageEl.title = allGoats[randomIndex].name;
 //   //create a random index
 //   randomIndex = makeRandom();
 //   //I want to display allGoats[randomIndex];
 //   rightImageEl.src = allGoats[randomIndex].path;
-//   rightImageEl.alt = allGoats[randomIndex].name;
+//   rightImageEl.title = allGoats[randomIndex].name;
 // }
 
 //helper function that will return a random number
-
 function makeRandom() {
   return Math.floor(Math.random() * allGoats.length);
 }
