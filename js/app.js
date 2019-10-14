@@ -7,15 +7,15 @@ var rightImageEl = document.getElementById('right');
 var containerEl = document.getElementById('image_container');
 
 //=============================================================
-//SHOW CONCEPT BY SETTING THESE PROPS MANUALLY
-//setting the src, name, and alt attributes to the leftImageEl
-leftImageEl.src = 'images/goat-away.jpg';
-leftImageEl.name = 'cruisin-goat';
-leftImageEl.alt = 'cruisin-goat';
-//setting the src, name, and alt attributes to the rightImageEl
-rightImageEl.src = 'images/kissing-goat.jpg';
-rightImageEl.name = 'kissing-goat';
-rightImageEl.alt = 'kissing-goat';
+// //SHOW CONCEPT BY SETTING THESE PROPS MANUALLY
+// //setting the src, name, and alt attributes to the leftImageEl
+// leftImageEl.src = 'images/goat-away.jpg';
+// leftImageEl.name = 'cruisin-goat';
+// leftImageEl.alt = 'cruisin-goat';
+// //setting the src, name, and alt attributes to the rightImageEl
+// rightImageEl.src = 'images/kissing-goat.jpg';
+// rightImageEl.name = 'kissing-goat';
+// rightImageEl.alt = 'kissing-goat';
 //=============================================================
 
 //declare an array to push all new instantiations to
@@ -54,13 +54,15 @@ function renderGoats() {
   allGoats[uniquePicsArray[0]].views++;
   //setting the src and alt attributes of the leftImageEl elements
   leftImageEl.src = allGoats[uniquePicsArray[0]].path;
-  leftImageEl.alt = allGoats[uniquePicsArray[0]].name;
+  leftImageEl.name = allGoats[uniquePicsArray[0]].name;
+  leftImageEl.title = allGoats[uniquePicsArray[0]].name;
 
   //adding one view to this goat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   allGoats[uniquePicsArray[1]].views++;
   //setting the src and alt attributes of the rightImageEl elements
   rightImageEl.src = allGoats[uniquePicsArray[1]].path;
-  rightImageEl.alt = allGoats[uniquePicsArray[1]].name;
+  leftImageEl.name = allGoats[uniquePicsArray[1]].name;
+  rightImageEl.title = allGoats[uniquePicsArray[1]].name;
 }
 
 //create a function that will give a random index number
@@ -84,15 +86,15 @@ function makeRandom() {
 }
 
 function handleClick() {
-  //identify which image was clicked on
-  var chosenImage = event.target.name;
-  // console.log('my selected image is: ', chosenImage);
+  //identify which image was clicked on by the title
+  var chosenImage = event.target.title;
   //here we loop over allGoats and compare the name property of each iteration to the chosenImage selected by the user
   for( var i = 0; i < allGoats.length; i++) {
     if(allGoats[i].name === chosenImage) {
       allGoats[i].votes++;
     }
   }
+  console.log('my selected image is: ', chosenImage);
   //re-render the goats
   renderGoats();
 }
